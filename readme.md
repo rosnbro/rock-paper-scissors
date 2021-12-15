@@ -1,0 +1,1 @@
+This is a game of Rock, Paper, Scissors played against the random selection of the javascript gods.
