@@ -1,16 +1,26 @@
-function playRound() {
+function computerSelection() {
     const computer = Math.floor(Math.random() * 3);
-    let playerSelection = window.prompt("Select one: Rock, Paper, or Scissors:");
-    let player = 0;
-    let winner = 0;
+    return computer;
+}
 
-    if (playerSelection.toLowerCase === "rock") {
+function playerSelection() {
+    let selection = window.prompt("Select one: Rock, Paper, or Scissors:");
+    let player = 0;
+
+    if (selection.toLowerCase === "rock") {
         player = 0;
-    } else if (playerSelection.toLowerCase === "paper") {
+    } else if (selection.toLowerCase === "paper") {
         player = 1;
-    } else (playerSelection.toLowerCase === "scissors"); {
+    } else (selection.toLowerCase === "scissors"); {
         player = 2;
     }
+    return player;
+}
+
+function playRound() {
+    let computer = computerSelection();
+    let player = playerSelection();
+    let winnner = 0;
 
     if (player == 0) {
         if (computer == 0) {
@@ -43,8 +53,10 @@ function playRound() {
 function game() {
     let wins = 0;
     let losses = 0;
+
     for (let i = 0; i < 5; i++) {
         let roundWin = playRound();
+
         if (roundWin == 0) {
             i--;
             console.log("It's a tie.");
@@ -59,6 +71,7 @@ function game() {
             break;
         }
     }
+
     if (wins == 3) {
         return "Congratulations! You win!";
     } else {
