@@ -1,0 +1,20 @@
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.selection {
+    display: block;
+    padding: 100px 100px;
+    box-shadow: 5px 7px 0 0 darkred;
+    border-radius: 100%;
+    background-color: red;
+    color: white;
+    font-size: 2em;
+    text-decoration: none;
+}

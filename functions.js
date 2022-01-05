@@ -1,74 +1,83 @@
+let score = [0, 0];
+let roundWiner;
+
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+const results = document.querySelector('.results');
+const roundWin = document.createElement('div');
+const gameWin = document.createElement('div');
+const restartPrompt = document.createElement('div');
+const restartButton = document.createElement('button');
+
+rockButton.addEventListener('click', () => start("rock"));
+paperButton.addEventListener('click', () => start("paper"));
+scissorsButton.addEventListener('click', () => start("scissors"));
+restartButton.addEventListener('click', () => restart());
+
+
 function computerSelection() {
     const compSelect = Math.floor(Math.random() * 3);            //selects a random integer from 0 to 2
-    let comp = "";
-
     if (compSelect == 0) {
-        comp += "rock";              //converts the computer selected integer into a choice of rock, paper, or scissors
+        return "rock";              //converts the computer selected integer into a choice of rock, paper, or scissors
     } else if (compSelect == 1) {
-        comp += "paper";
+        return "paper";
     } else if (compSelect == 2) {
-        comp += "scissors"
+        return "scissors"
     }
-    return comp;
 }
 
-function playerSelection() {
-    let playSelect = window.prompt("Select one: Rock, Paper, or Scissors:");         //prompts user for their choice
-    let play = playSelect.toLowerCase();
-    return play;
-}
-
-function playRound() {
+function playRound(player) {
     let computer = computerSelection();
-    let player = playerSelection();
-    let winner = 0;
 
     if ((player == "rock" && computer == "rock") || 
         (player == "paper" && computer == "paper") ||
         (player == "scissors" && computer == "scissors")) {            //compares the selections of the player and computer
-        winner = 0;
+        roundWiner = "tie";
     } else 
     if ((player == "rock" && computer == "scissors") ||
         (player == "paper" && computer == "rock") ||
         (player == "scissors" && computer == "paper")) {
-        winner = 1;
+        roundWiner = "player";
+        score[0]++;
     } else 
     if ((player == "rock" && computer == "paper") ||
         (player == "paper" && computer == "scissors") ||
         (player == "scissors" && computer == "rock")) {
-        winner = 2;
+        roundWiner = "computer";
+        score[1]++
     }
-    return winner;
+    console.log(roundWiner);
 }
 
-function game() {
-    let wins = 0;
-    let losses = 0;
-
-    for (let i = 0; i < 5; i++) {
-        let roundWin = playRound();
-
-        if (roundWin == 0) {
-            i--;                                        //keeps score of who wins each round, repeats in the case of a tie
-            console.log("It's a tie.");
-        } else if (roundWin == 1) {
-            wins++;
-            console.log("You win this round!");
-        } else if (roundWin == 2) {
-            losses++;
-            console.log("You lost this round...")
-        }
-        if (wins == 3 || losses == 3) {
-            break;                                      //ends the game after someone wins a best of five
-        }
+function start(player) {
+    playRound(player);
+    if (score[0] >= 5 || score[1] >= 5) {
+        end();
     }
-    if (wins == 3) {
-        return "Congratulations! You win!";
+
+}
+
+function end() {
+    if (score[0] == 5) {
+        gameWin.textContent = "You have emerged triumphant you glorious son of a gun.";
     } else {
-        return "You lost the game!";
+        gameWin.textContent = "Mission failed. We'll get 'em next time."
     }
+    restartPrompt.classList.add("restartPrompt");
+    restartPrompt.textContent = "More hostiles incoming! Engage?";
+    restartButton.classList.add("restartButton");
+    restartButton.textContent = "Oh yeah."
+    results.appendChild(gameWin);
+    results.appendChild(restartPrompt);
+    results.appendChild(restartButton);
 }
 
-console.log("Rock, Paper, Scissors! Best of five:");
-let outcome = game();
-console.log(outcome);
+function restart() {
+    score = [0, 0];
+    let children = results.firstElementChild;
+    while (children) {
+        children.remove();
+        children = results.firstElementChild;
+    }
+}
