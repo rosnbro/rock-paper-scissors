@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="topPage">
-        <h1 class="title">Incoming attack!</h1>
+        <h1 class="title">Incoming Attack!</h1>
         <h2 class="subtitle">Choose counter-strike package, codename:</h2>
     </div>
     <div class="buttons">
@@ -18,8 +18,12 @@
         <button class="selection" id="paper">Paper</button>
         <button class="selection" id="scissors">Scissors</button>
     </div>
-    <div class="results">
-
+    <div class="ticker">
+        <div class="playerScore">0</div>
+        <div class="roundWin"></div>
+        <div class="computerScore">0</div>  
     </div>
+    <div class="results"></div>
+    <div class="overlay" onclick="overlayOff()"></div>
 </body>
 </html>
