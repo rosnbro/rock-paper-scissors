@@ -1,3 +1,5 @@
+//variable & constant declarations
+
 let score = [0, 0];
 let roundWinner;
 
@@ -16,6 +18,8 @@ const restartPrompt = document.createElement('div');
 const restartButton = document.createElement('button');
 const instructions = document.createElement('div');
 
+//interactive elements
+
 rockButton.addEventListener('click', () => start("rock"));
 paperButton.addEventListener('click', () => start("paper"));
 scissorsButton.addEventListener('click', () => start("scissors"));
@@ -27,18 +31,21 @@ overlay.addEventListener('click', () => {
 
 window.onload = intro();
 
+//introduces the user to the game premise
+
 function intro() {
-    instructions.innerHTML = "<p>We are at war!</p><p>Enemy forces have sent one of their three specialized attack groups to destroy us, codenamed: Rock, Paper, and Scissors</p> <p>You must choose the correct unit to counter their attack- Paper beats Rock, Scissors beat Paper, & Rock beats Scissors</p><p>Securing vicotry in five battles should be enough to win the war.</p><p>Good luck.</p>";
+    instructions.innerHTML = "<p>We are at war!</p><p>Enemy forces have sent one of their three specialized attack groups to destroy us- codenamed: Rock, Paper, and Scissors.</p> <p>You must choose the correct unit to counter their attack.- Paper beats Rock, Scissors beat Paper, & Rock beats Scissors.</p><p>Securing vicotry in five battles should be enough to win the war.</p><p>Good luck.</p>";
     instructions.classList.add("instructions");
     overlay.appendChild(instructions);
     overlay.style.display = "block";
 }
 
+//generates a random integer from 0 to 2 and converts that value into rock, paper, or scissors
 
 function computerSelection() {
-    const compSelect = Math.floor(Math.random() * 3);            //selects a random integer from 0 to 2
+    const compSelect = Math.floor(Math.random() * 3);
     if (compSelect == 0) {
-        return "rock";              //converts the computer selected integer into a choice of rock, paper, or scissors
+        return "rock";
     } else if (compSelect == 1) {
         return "paper";
     } else if (compSelect == 2) {
@@ -46,12 +53,14 @@ function computerSelection() {
     }
 }
 
+//compares the selections of the player and computer and presents the winner of each round
+
 function playRound(player) {
     let computer = computerSelection();
 
     if ((player == "rock" && computer == "rock") || 
         (player == "paper" && computer == "paper") ||
-        (player == "scissors" && computer == "scissors")) {            //compares the selections of the player and computer
+        (player == "scissors" && computer == "scissors")) {
         roundWinner = "Tie.";
     } else 
     if ((player == "rock" && computer == "scissors") ||
@@ -70,6 +79,8 @@ function playRound(player) {
     roundResults.insertBefore(roundWin, computerScore);
 }
 
+//starts each round, checks the score for a winning condition, and displays score
+
 function start(player) {
     playRound(player);
     if (score[0] >= 5 || score[1] >= 5) {
@@ -79,6 +90,8 @@ function start(player) {
     computerScore.textContent = `${score[1]}`;
 }
 
+//displays end of game content, prompts user for reset
+
 function end() {
     if (score[0] == 5) {
         gameWin.textContent = "You have emerged triumphant, glorious victor!";
@@ -87,7 +100,7 @@ function end() {
     }
     restartPrompt.classList.add("restartPrompt");
     restartButton.classList.add("restartButton");
-    gameWin.classList.add('gameWin');
+    gameWin.classList.add("gameWin");
 
     restartPrompt.textContent = "More hostiles incoming! Engage?";
     restartButton.textContent = "Oh yeah.";
@@ -96,9 +109,12 @@ function end() {
     results.appendChild(restartPrompt);
     results.appendChild(restartButton);
 
-    buttons.style.display = 'none';
+    buttons.style.display = "none";
+    results.style.display = "flex";
     overlay.style.display = "block";
 }
+
+//resets game score and removes end game content
 
 function restart() {
     score = [0, 0];
@@ -110,5 +126,6 @@ function restart() {
         children.remove();
         children = results.firstElementChild;
     }
-    buttons.style.display = 'flex';
+    results.style.display = "none";
+    buttons.style.display = "flex";
 }
