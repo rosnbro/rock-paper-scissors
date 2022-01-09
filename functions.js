@@ -34,7 +34,7 @@ window.onload = intro();
 //introduces the user to the game premise
 
 function intro() {
-    instructions.innerHTML = "<p>We are at war!</p><p>Enemy forces have sent one of their three specialized attack groups to destroy us- codenamed: Rock, Paper, and Scissors.</p> <p>You must choose the correct unit to counter their attack.- Paper beats Rock, Scissors beat Paper, & Rock beats Scissors.</p><p>Securing vicotry in five battles should be enough to win the war.</p><p>Good luck.</p>";
+    instructions.innerHTML = "<p>We are at war!</p><p>Enemy forces have sent one of their three specialized attack groups to destroy us- codenamed: Rock, Paper, and Scissors.</p> <p>You must choose the correct unit to counter their attack.- Paper beats Rock, Scissors beat Paper, & Rock beats Scissors.</p><p>Securing victory in five battles should be enough to win the war.</p><p>Good luck.</p>";
     instructions.classList.add("instructions");
     overlay.appendChild(instructions);
     overlay.style.display = "block";
